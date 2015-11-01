@@ -1,6 +1,5 @@
 package com.maximiliano;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.regex.Matcher;
@@ -12,15 +11,9 @@ import java.util.regex.Pattern;
 public class Tweet {
     public String text;
     public Date created_at;
-    private HashSet<String> hashtags;
+    public HashSet<String> hashtags;
 
     private static Pattern hashsetPattern = Pattern.compile("#([a-zA-Z0-9_]+)");
-
-    public Tweet(String text, Date created_at, Collection<String> hashtags) {
-        this.text = text;
-        this.created_at = created_at;
-        this.hashtags = new HashSet<String>(hashtags);
-    }
 
     private void computeHashtagsFromText() {
         hashtags = new HashSet<String>();

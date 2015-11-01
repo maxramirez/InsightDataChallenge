@@ -57,15 +57,15 @@ public class HashtagGraph {
      */
     private void removeEdge(HashtagEdge hashtagEdge) {
         edges.remove(hashtagEdge);
-        HashSet<HashtagEdge> node1=nodes.get(hashtagEdge.hashtag1);
-        HashSet<HashtagEdge> node2=nodes.get(hashtagEdge.hashtag2);
-        node1.remove(hashtagEdge);
-        node2.remove(hashtagEdge);
-        if(node1.size()==0){
-            nodes.remove(node1);
+        HashSet<HashtagEdge> node1Edges=nodes.get(hashtagEdge.hashtag1);
+        HashSet<HashtagEdge> node2Edges=nodes.get(hashtagEdge.hashtag2);
+        node1Edges.remove(hashtagEdge);
+        node2Edges.remove(hashtagEdge);
+        if(node1Edges.size()==0){
+            nodes.remove(hashtagEdge.hashtag1);
         }
-        if(node2.size()==0){
-            nodes.remove(node2);
+        if(node2Edges.size()==0){
+            nodes.remove(hashtagEdge.hashtag2);
         }
     }
 

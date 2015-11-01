@@ -8,10 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Maximiliano on 10/30/2015.
@@ -21,7 +18,7 @@ public class TweetProcessor {
     final SimpleDateFormat twitterDateFormat = new SimpleDateFormat(TWITTER_DATE_FORMAT);
     List<TweetFeature> featureList = new ArrayList<TweetFeature>();
     List<TextFilter> filterList = new ArrayList<TextFilter>();
-    enum TweetFields {text,created_at,hashtags};
+    public enum TweetFields {text,created_at,hashtags};
     private boolean extract_created_at;
     private boolean extract_text;
     private boolean extract_hashtags;
@@ -59,23 +56,24 @@ public class TweetProcessor {
             return null;
         }
         TweetBuilder tweetBuilder = new TweetBuilder();
-        if (extract_text) {
+        if (extract_text&&json.has("text")) {
             String message = json.getString("text");
             message = cleanMessage(message);
             tweetBuilder.setText(message);
         }
-        if (extract_created_at) {
+        if (extract_created_at&&json.has("created_at")) {
             String createdAt = json.getString("created_at");
             Date date = twitterDateFormat.parse(createdAt);
             tweetBuilder.setCreated_at(date);
         }
         if (extract_hashtags) {
-            JSONArray hashtags = json.getJSONArray("hashtags");
-            List<String> list = new ArrayList<String>(hashtags.length());
-            for (int i = 0; i < hashtags.length(); i++) {
-                list.add(hashtags.getString(i));
+            JSONObject entities = json.getJSONObject("entities");
+            JSONArray jsonHashtag= entities.getJSONArray("hashtags");
+            HashSet<String> hashtags=new HashSet<String>();
+            for (int i = 0; i < jsonHashtag.length(); i++) {
+                hashtags.add(jsonHashtag.getJSONObject(i).getString("text").toUpperCase());
             }
-            tweetBuilder.setHashtags(list);
+            tweetBuilder.setHashtags(hashtags);
         }
         Tweet tweet = tweetBuilder.createTweet();
         processTweet(tweet);

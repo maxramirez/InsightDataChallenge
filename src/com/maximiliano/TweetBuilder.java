@@ -2,6 +2,7 @@ package com.maximiliano;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 public class TweetBuilder {
     private String text = null;
@@ -24,6 +25,12 @@ public class TweetBuilder {
     }
 
     public Tweet createTweet() {
-        return new Tweet(text, created_at, hashtags);
+        Tweet tweet = new Tweet();
+        if (hashtags!=null) {
+            tweet.hashtags= new HashSet<String>(hashtags);
+        }
+        tweet.created_at=created_at;
+        tweet.text=text;
+        return tweet;
     }
 }

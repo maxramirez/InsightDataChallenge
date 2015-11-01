@@ -28,22 +28,32 @@ public class Main {
         runFeature2(inputPath, output2Path);
     }
 
-    private static void runFeature2(String inputPath, String outputPath) throws IOException {
-        File input = new File(inputPath);
-        BufferedReader br = new BufferedReader(new FileReader(input));
-        TweetProcessor tweetProcessor = new TweetProcessor(TweetProcessor.TweetFields.created_at, TweetProcessor.TweetFields.hashtags);
-        File output = new File(outputPath);
-        final FileWriter fileWriter = new FileWriter(output);
+    public static void runFeature2(String inputPath, String outputPath) throws IOException {
+        FileWriter fileWriter = null;
+        BufferedReader br = null;
+        try {
+            File input = new File(inputPath);
+            br = new BufferedReader(new FileReader(input));
+            TweetProcessor tweetProcessor = new TweetProcessor(TweetProcessor.TweetFields.created_at, TweetProcessor.TweetFields.hashtags);
+            File output = new File(outputPath);
+            fileWriter = new FileWriter(output);
 
-        AverageDegreeCalculator.AverageDegreeListener averageDegreeListener = new AverageDegreeWriter(fileWriter);
-        AverageDegreeCalculator averageDegreeCalculator = new AverageDegreeCalculator(averageDegreeListener);
-        tweetProcessor.addFeature(averageDegreeCalculator);
+            AverageDegreeCalculator.AverageDegreeListener averageDegreeListener = new AverageDegreeWriter(fileWriter);
+            AverageDegreeCalculator averageDegreeCalculator = new AverageDegreeCalculator(averageDegreeListener);
+            tweetProcessor.addFeature(averageDegreeCalculator);
 
-        fileWriter.close();
-        br.close();
+            tweetProcessor.processJsonStream(br);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }finally {
+            if(fileWriter!=null) fileWriter.close();
+            if(br!=null)br.close();
+        }
     }
 
-    private static void runFeature1(String inputPath, String outputPath) throws IOException {
+    public static void runFeature1(String inputPath, String outputPath) throws IOException {
         File input = new File(inputPath);
         BufferedReader br = null;
         FileWriter fileWriter = null;
