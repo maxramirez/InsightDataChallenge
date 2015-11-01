@@ -30,7 +30,7 @@ public class AverageDegreeCalculator implements TweetProcessor.TweetFeature {
     /**
      * This is a priority queue that mantains the oldest tweet at the top of the queue.
      */
-    PriorityQueue<Tweet> latestTweets = new PriorityQueue<Tweet>(tweetComparator);
+    PriorityQueue<Tweet> latestTweets;
 
     Date currentDate;
     private AverageDegreeListener averageDegreeListener;
@@ -38,6 +38,7 @@ public class AverageDegreeCalculator implements TweetProcessor.TweetFeature {
 
     public AverageDegreeCalculator(AverageDegreeListener averageDegreeListener) {
         this.averageDegreeListener = averageDegreeListener;
+        latestTweets=new PriorityQueue<Tweet>(tweetComparator);
     }
 
     @Override
