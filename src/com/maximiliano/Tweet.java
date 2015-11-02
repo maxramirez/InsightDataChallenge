@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Maximiliano on 10/30/2015.
  */
-public class Tweet {
+public class Tweet{
     public String text;
     public Date created_at;
     public HashSet<String> hashtags;

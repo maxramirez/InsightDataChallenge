@@ -38,7 +38,7 @@ public class AverageDegreeCalculator implements TweetProcessor.TweetFeature {
 
     public AverageDegreeCalculator(AverageDegreeListener averageDegreeListener) {
         this.averageDegreeListener = averageDegreeListener;
-        latestTweets=new PriorityQueue<Tweet>(tweetComparator);
+        latestTweets=new PriorityQueue<Tweet>(10,tweetComparator);
     }
 
     @Override

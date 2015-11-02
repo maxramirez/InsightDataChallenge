@@ -1,7 +1,7 @@
 package com.maximiliano.Test;
 
+import com.maximiliano.Feature2;
 import com.maximiliano.Features.AverageDegree.HashtagGraph;
-import com.maximiliano.Main;
 import com.maximiliano.Tweet;
 import com.maximiliano.TweetBuilder;
 import org.json.JSONException;
@@ -69,7 +69,7 @@ public class TweetTest {
     }
     @Test
     public void testFile() throws IOException, JSONException, ParseException {
-        Main.runFeature2("tweet_input/tweets.txt","tweet_output/out.txt");
+        Feature2.runFeature2("tweet_input/tweets.txt", "tweet_output/out.txt");
     }
 
 }
