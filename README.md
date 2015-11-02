@@ -42,12 +42,12 @@ When a tweet is removed from the tweet window, all corresponding edges are decre
 The average degree is calculated with the following expression:
 
  AvgDegree=totalEdges*2/totalNodes.
-
+ 
 Instructions
 --
 
-To run this challenge Just run the run.sh file.
-It also can be run with parameters using java
+To run this challenge just run the run.sh file, this loads an input from tweet_input/tweets.txt and outputs both the twitter stream and
+It also can be run with parameters using Feature1 and Feature2 java jar files.
 
 java -jar Feature1.jar input.txt output.txt
 java -jar Feature2.jar input.txt output.txt
@@ -55,3 +55,4 @@ java -jar Feature2.jar input.txt output.txt
 About  compiling
 --
 It can also be run as an Idea project and is build on java 8.
+un as an Idea project and is build on java 8.
