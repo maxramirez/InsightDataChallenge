@@ -21,7 +21,6 @@ public class Feature1 {
         String inputPath = args.length==0?"tweet_input/tweets.txt":args[0];
         String outputPath = args.length<3?"tweet_output/ft1.txt":args[1];
         runFeature1(inputPath, outputPath);
-        Feature2.runFeature2(inputPath, outputPath);
     }
 
     public static void runFeature1(String inputPath, String outputPath) throws IOException {

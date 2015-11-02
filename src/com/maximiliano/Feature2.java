@@ -20,7 +20,7 @@ public class Feature2 {
      */
     public static void main(String[] args) throws IOException, JSONException, ParseException {
         String inputPath = args.length==0?"tweet_input/tweets.txt":args[0];
-        String outputPath = args.length<3?"tweet_output/ft1.txt":args[1];
+        String outputPath = args.length<3?"tweet_output/ft2.txt":args[1];
         runFeature2(inputPath, outputPath);
     }
 
